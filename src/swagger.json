@@ -1,0 +1,668 @@
+{
+    "openapi": "3.0.0", 
+    "info":{ 
+        "title": "Sistema de Gerenciamento de Jogadores, Times e Campeonatos",
+        "description": "Este projeto é parte de um desafio de desenvolvimento em grupo que visa criar um sistema completo de gerenciamento de informações de jogadores, times e campeonatos. A aplicação é desenvolvida usando Node.js, PostgreSQL e Git, seguindo os princípios do CRUD (Create, Read, Update, Delete).",
+        "version": "1.0.0"
+    },
+
+    "paths": {
+        "/players": {
+            "post": {
+                "summary": "Cadastro de jogadores",
+                "description": "Essa rota será responsável por adicionar novos jogadores",
+                "tags": ["Players"],
+                "requestBody": {
+                    "content":{
+                        "application/json":{
+                            "schema": {
+                               "$ref":"#/components/schemas/Players"
+                            },
+                            "example":{
+                                "Player":{
+                                    "value":{
+                                        "name": "Kairo",
+                                        "age": 21
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "401":{
+                        "description":"Não autorizado"
+                    }, 
+                    "400":{
+                        "description":"Jogador já existe"
+                    },
+                    "200":{
+                        "description":"Jogador adicionado",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref": "#/components/schemas/Players"
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get":{
+                "summary": "Listar todos os jogadores",
+                "description": "Essa rota será responsável por listar jogadores",
+                "tags": ["Players"],
+                "responses":{
+                    "401":{
+                        "description":"Não autorizado"
+                    }, 
+                    "400":{
+                        "description":"Jogador já existe"
+                    },
+                    "200":{
+                        "description":"ok",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"array",
+                                    "jogadores":{
+                                        "$ref":"#/components/schemas/Players"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/players/{id}":{
+            "get":{
+                "summary": "Procurar de jogadores por id",
+                "description": "Essa rota será responsável por procurar jogadores por id",
+                "tags": ["Players"],
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "descripition":"Busca de jogador pelo id",
+                        "required": true
+                    }
+                ],
+                "responses":{
+                    "401":{
+                        "description":"Não autorizado"
+                    }, 
+                    "400":{
+                        "description":"Jogador não existe"
+                    },
+                    "200":{
+                        "description":"ok",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/Players"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put":{
+                "summary": "Alteração de jogadores por id",
+                "description": "Essa rota será responsável por alterar jogadores por id",
+                "tags": ["Players"],
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "descripition":"Alteração de jogador pelo id",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content":{
+                        "application/json":{
+                            "schema": {
+                               "$ref":"#/components/schemas/Players"
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "401":{
+                        "description":"Não autorizado"
+                    }, 
+                    "400":{
+                        "description":"Jogador não existe"
+                    },
+                    "200":{
+                        "description":"ok",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/Players"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete":{
+                "summary": "Exclusão de jogador por id",
+                "description": "Essa rota será responsável por deletar jogador por id",
+                "tags": ["Players"],
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"delete",
+                        "descripition":"Deletar Jogador pelo id",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content":{
+                        "application/json":{
+                            "schema": {
+                               "$ref":"#/components/schemas/Players"
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "401":{
+                        "description":"Não autorizado"
+                    }, 
+                    "400":{
+                        "description":"time não existe"
+                    },
+                    "200":{
+                        "description":"ok",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/Players"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/teams": {
+            "post": {
+                "summary": "Cadastro de times",
+                "description": "Essa rota será responsável por adicionar novos times",
+                "tags": ["Teams"],
+                "requestBody": {
+                    "content":{
+                        "application/json":{
+                            "schema": {
+                               "$ref":"#/components/schemas/Teams"
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "401":{
+                        "description":"Não autorizado"
+                    }, 
+                    "400":{
+                        "description":"Time já existe"
+                    },
+                    "200":{
+                        "description":"Time adicionado"
+                    }
+                }
+            },
+            "get":{
+                "summary": "Listar todos os times",
+                "description": "Essa rota será responsável por listas times",
+                "tags": ["Teams"],
+                "responses":{
+                    "401":{
+                        "description":"Não autorizado"
+                    }, 
+                    "400":{
+                        "description":"Jogador já existe"
+                    },
+                    "200":{
+                        "description":"ok",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"array",
+                                    "jogadores":{
+                                        "items":{
+                                            "$ref":"#/components/schemas/Teams"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/teams/{id}":{
+            "get":{
+                "summary": "Procurar de times por id",
+                "description": "Essa rota será responsável por procurar time por id",
+                "tags": ["Teams"],
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "descripition":"Busca de time pelo id",
+                        "required": true
+                    }
+                ],
+                "responses":{
+                    "401":{
+                        "description":"Não autorizado"
+                    }, 
+                    "400":{
+                        "description":"time não existe"
+                    },
+                    "200":{
+                        "description":"ok",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/Teams"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put":{
+                "summary": "Alteração de time por id",
+                "description": "Essa rota será responsável por alterar time por id",
+                "tags": ["Teams"],
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "descripition":"Alterar time pelo id",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content":{
+                        "application/json":{
+                            "schema": {
+                               "$ref":"#/components/schemas/Teams"
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "401":{
+                        "description":"Não autorizado"
+                    }, 
+                    "400":{
+                        "description":"time não existe"
+                    },
+                    "200":{
+                        "description":"ok",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/Teams"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete":{
+                "summary": "Exclusão de time por id",
+                "description": "Essa rota será responsável por deletar time por id",
+                "tags": ["Teams"],
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"delete",
+                        "descripition":"Deletar time pelo id",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content":{
+                        "application/json":{
+                            "schema": {
+                               "$ref":"#/components/schemas/Teams"
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "401":{
+                        "description":"Não autorizado"
+                    }, 
+                    "400":{
+                        "description":"time não existe"
+                    },
+                    "200":{
+                        "description":"ok",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/Teams"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/championships": {
+            "post": {
+                "summary": "Cadastro de campeonatos",
+                "description": "Essa rota será responsável por adicionar novos campeonatos",
+                "tags": ["Championships"],
+                "requestBody": {
+                    "content":{
+                        "application/json":{
+                            "schema": {
+                               "$ref":"#/components/schemas/Championship"
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "401":{
+                        "description":"Não autorizado"
+                    }, 
+                    "400":{
+                        "description":"Campeonato já existe"
+                    },
+                    "200":{
+                        "description":"Campeonato adicionado"
+                    }
+                }
+            },
+            "get":{
+                "summary": "Listar todos os campeonatos",
+                "description": "Essa rota será responsável por listar campeonatos",
+                "tags": ["Championships"],
+                "responses":{
+                    "401":{
+                        "description":"Não autorizado"
+                    }, 
+                    "400":{
+                        "description":"Campeonato já existe"
+                    },
+                    "200":{
+                        "description":"ok",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"array",
+                                    "jogadores":{
+                                        "items":{
+                                            "$ref":"#/components/schemas/Championship"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/championships/{id}":{
+            "get":{
+                "summary": "Procurar de campeonato por id",
+                "description": "Essa rota será responsável por procurar campeonato por id",
+                "tags": ["Championships"],
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"query",
+                        "descripition":"Busca de campeonato pelo id",
+                        "required": true
+                    }
+                ],
+                "responses":{
+                    "401":{
+                        "description":"Não autorizado"
+                    }, 
+                    "400":{
+                        "description":"Campeonato não existe"
+                    },
+                    "200":{
+                        "description":"ok",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/Championship"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put":{
+                "summary": "Alteração de campeonato por id",
+                "description": "Essa rota será responsável por alterar campeonato por id",
+                "tags": ["Championships"],
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "descripition":"Alteração de campeonato pelo id",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content":{
+                        "application/json":{
+                            "schema": {
+                               "$ref":"#/components/schemas/Championship"
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "401":{
+                        "description":"Não autorizado"
+                    }, 
+                    "400":{
+                        "description":"Campeonato não existe"
+                    },
+                    "200":{
+                        "description":"ok",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/Championship"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete":{
+                "summary": "Exclusão de campeonato por id",
+                "description": "Essa rota será responsável por deletar campeonato por id",
+                "tags": ["Championships"],
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"delete",
+                        "descripition":"Deletar campeonato pelo id",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content":{
+                        "application/json":{
+                            "schema": {
+                               "$ref":"#/components/schemas/Championship"
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "401":{
+                        "description":"Não autorizado"
+                    }, 
+                    "400":{
+                        "description":"Campeonato não existe"
+                    },
+                    "200":{
+                        "description":"ok",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/Championship"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/teamchampionsship/":{
+            "post":{
+                "summary": "Adicionar um time a um campeonato",
+                "description": "Essa rota será responsável por adicionar um time a um campeonato",
+                "tags": ["TeamChampionship"],
+                "requestBody": {
+                    "content":{
+                        "application/json":{
+                            "schema": {
+                               "idTeam":"string",
+                                "idChampion":"string"
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "401":{
+                        "description":"Não autorizado"
+                    }, 
+                    "400":{
+                        "description":"Campeonato ou time não existe"
+                    },
+                    "200":{
+                        "description":"Time adicionado ao campeonato"
+
+                    }
+                }
+            },
+            "post":{
+                "summary": "Criar um campeonato já associando um time a ele",
+                "description": "Essa rota será responsável por criar um campeonato já associando um time a ele",
+                "tags": ["TeamChampionship"],
+                "requestBody": {
+                    "content":{
+                        "application/json":{
+                            "schema": {
+                               "name":"string",
+                                "startDate":"DateTime",
+                                "endDate":"DateTime",
+                                "idTeam":"string"
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "401":{
+                        "description":"Não autorizado"
+                    }, 
+                    "400":{
+                        "description":"Campeonato não existe"
+                    },
+                    "200":{
+                        "description":"Time criado associado ao campeonato"
+
+                    }
+                }
+            },
+            "get":{
+                "summary": "Rota para listar times e campeonatos relacionados",
+                "description": "Essa rota será responsável por Rota para listar times e campeonatos relacionados",
+                "tags": ["TeamChampionship"],
+                "responses":{
+                    "401":{
+                        "description":"Não autorizado"
+                    }, 
+                    "400":{
+                        "description":""
+                    },
+                    "200":{
+                        "description":"ok",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"array",
+                                    "jogadores":{
+                                        "items":{
+                                            "$ref":"#/components/schemas/Championship",
+                                            "$ref":"#/components/schemas/Teams"
+
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components":{
+        "schemas":{
+            "Players":{
+                "type":"object",
+                "properties":{
+                    "name":{
+                        "type": "string"
+                    },
+                    "age":{
+                        "type": "number"
+                    }
+                }
+            },
+            "Teams":{
+                "type":"object",
+                "properties":{
+                    "name":{
+                        "type": "string"
+                    },
+                    "foundation":{
+                        "type": "DateTime"
+                    }
+                }
+            },
+            "Championship":{
+                "type":"object",
+                "properties":{
+                    "name":{
+                        "type": "string"
+                    },
+                    "startDate":{
+                        "type": "DateTime"
+                    },
+                    "endtDate":{
+                        "type": "DateTime"
+                    }
+                }
+            }
+        }
+    }
+}
+    
